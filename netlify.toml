@@ -1,0 +1,15 @@
+[build]
+  functions = "netlify"
+  publish = "."
+
+[functions]
+  #ini biar folder yang gak di require ikut ke build (terutama yang di pake fs)
+  included_files = ["core/**", "plugins/**","public/**"]
+  #ini biar module nya ikut ke build (biar gak Not Found)
+  node_bundler = "esbuild"
+  external_node_modules = ["axios", "cheerio", "chalk", "multer", "express"]
+[[redirects]]
+  force = true
+  from = "/*"
+  status = 200
+  to = "/.netlify/functions/express/:splat"
